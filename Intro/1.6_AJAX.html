@@ -1,0 +1,83 @@
+<!--
+Two event handlers for the buttons on the page
+$("#getcontent").click(getContent);
+$("#loadhtml").click(loadHTML);
+
+inside "getContent" fn that handles an event
+  $.ajax("sampletextcontent.txt", {     // arg 1
+    success: setContent,                // arg 2.1
+    type: "GET",                        // arg 2.2
+    dataType: "text"                    // arg 2.3
+  });
+
+  // using jQ object and calling global .ajax() fn
+  // arg 1    the content we want to get in the form of a url
+  // arg 2.1  the fn to be called upon success
+  // arg 2.2  the HTTP type of request
+  // arg 2.5  the data type expected as the return of the request
+
+in the setContent(data, status, jqxhr) fn to be called upon success
+setContent(data, status, jqxhr)
+  $("#example").text(data);  // jQ to get ref to the 'example' div and calling
+                             // the .text() fn to set data content back from
+                             // the server
+  - data = the actual content of the URL that was requested
+  - jqxhr =  the browser's underlying native xml http request object
+
+the above is so common, there is a jQ convenience fn called '.load()'
+  - all that is passed in is the URL for the content we want to retrieve
+  -  the load function takes care of everything. From retrieving the data, to
+     placing the returns data inside the element, specified by this selector.
+
+function loadHTML() {
+  $("#example").load("samplehtml.html");
+}
+-->
+
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>jQuery and AJAX</title>
+  <link rel="stylesheet" href="../style.css" />
+  <script type="text/javascript" src="../jquery-3.0.0.js"></script>
+  <script type="text/javascript">
+    $("document").ready(function() {
+      $("#getcontent").click(getContent);
+      $("#loadhtml").click(loadHTML);
+    });
+
+    function getContent() {
+      $.ajax("sampletextcontent.txt", {
+        success: setContent,
+        type: "GET",
+        dataType: "text"
+      });
+    }
+
+    function setContent(data, status, jqxhr) {
+      $("#example").text(data);
+    }
+
+    function loadHTML() {
+      $("#example").load("samplehtml.html");
+    }
+  </script>
+</head>
+
+<body>
+  <h1>AJAX and jQuery</h1>
+  <div id="content">
+    <p>One of jQuery's great strengths is how it simplifies working with AJAX. jQuery provides high-level wrapper functions for retrieving data, working with different data types, handling errors, and monitoring the AJAX request process.</p>
+    <ul>
+      <li><code>ajax()</code>: used to perform generic AJAX requests</li>
+      <li><code>load()</code>: loads AJAX content directly into a page element</li>
+    </ul>
+    <div id="example">
+    </div>
+    <button id="getcontent">Get Text</button>
+    <button id="loadhtml">Load HTML</button>
+  </div>
+</body>
+
+</html>
