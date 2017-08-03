@@ -1,0 +1,59 @@
+<!--
+There's two basic functions to attach and detach event handlers ('on' 'off')
+
+$("#example").on("mousemove", onMouseOver);
+
+$("#example")     jQ selector for els with ID 'example'
+.on()             fn that listens for an event
+"mousemove"       3 events that
+"click"           are being
+"mouseleave"      listened for
+onMouseOver ...   3 callback functions to handle each of the 3 events
+
+function onMouseOver(evt)  // the jQuery unified event object as a parameter
+                           // - unifies set of event info across browsers
+                          //  - .type .pageX .pageY ...  are props on that obj
+-->
+
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>jQuery Event Handling</title>
+  <link rel="stylesheet" href="../style.css" />
+  <script type="text/javascript" src="../jquery-3.0.0.js"></script>
+  <script type="text/javascript">
+    $("document").ready(function() {
+      $("#example").on("mousemove", onMouseOver);
+      $("#example").on("click", onMouseClick);
+      $("#example").on("mouseleave", onMouseLeave);
+    });
+
+    function onMouseOver(evt) {
+      $("#example").text(evt.type + ": " + evt.pageX + ", " + evt.pageY + "\n" +
+        "Button: " + evt.which + " Key: " + evt.metaKey);
+    }
+
+    function onMouseClick(evt) {
+      $("#example").text(evt.type + ": " + evt.pageX + ", " + evt.pageY);
+      $("#example").off("mousemove", onMouseOver);
+    }
+
+    function onMouseLeave(evt) {
+      $("#example").text("mouseleave");
+    }
+  </script>
+</head>
+
+<body>
+  <h1>jQuery Event Handling</h1>
+  <div id="content">
+
+    <p>jQuery normalizes an event structure across browsers and provides cross-browser consistency for properties such as the event name, the page coordinates of the mouse, the element where the event originated along with any other element related to the
+      event, and information such as whether a meta-key or specific mouse button was pressed.</p>
+    <div id="example">
+    </div>
+  </div>
+</body>
+
+</html>
