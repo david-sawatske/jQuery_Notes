@@ -1,0 +1,99 @@
+<!--
+JQuery provides a layer of API functions over the standard DOM that simplifies
+a lot of common operations
+
+The children() function retrieves the immediate (that is, first-level
+down) child elements of the matched set, excluding text nodes.
+
+get all of the children  (as a set) of the el with the ID 'example'
+  $("#example").children().css("border", "3px solid red");
+
+setting a var
+  var elem = $("#para1");
+
+get the next and prev els of the el set as var 'elem' and border in 2 diff colors
+  elem.prev().css("border", "3px solid red");
+  elem.next().css("border", "3px solid green");
+
+get the parents of 'elem' a blue border
+  elem.parents().css("border", "3px solid blue");
+
+limit the parents of 'elem' to not include the "body" tag
+  elem.parentsUntil($("body")).css("border", "3px solid blue");
+
+get the el that has the ID of 'para4', starting from the element with ID 'example'
+  $("#example").find("#para4").css("border", "3px solid red");
+
+set up vars for left margin and border
+  var leftmargin = 0;
+  var border = 3;
+
+get all paragraphs inside the element with ID 'example'
+call a callback fn that takes in args for index and element (DOM el)
+get a jQ version of the DOM element
+calculate and change the CSS, border by +2 and margin by +10 w- each iteration
+  - using method chaining
+
+  $("#example p").each(function(index, element) {
+    $(element).css("border", border + "px solid red")
+      .css("margin-left", leftmargin);
+    border += 2;
+    leftmargin += 10;
+  });
+
+  -->
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Using jQuery Document Traversal</title>
+  <link rel="stylesheet" type="text/css" href="../style.css" />
+  <script type="text/javascript" src="../jquery-3.0.0.js"></script>
+  <script type="text/javascript">
+    $("document").ready(function() {
+
+      $("#example").children().css("border", "3px solid red");
+
+      var elem = $("#para1");
+      elem.prev().css("border", "3px solid red");
+      elem.next().css("border", "3px solid green");
+      elem.parents().css("border", "3px solid blue");
+      elem.parentsUntil($("body")).css("border", "3px solid blue");
+
+      $("#example").find("#para4").css("border", "3px solid red");
+
+      var leftmargin = 0;
+      var border = 3;
+      $("#example p").each(function(index, element) {
+        $(element).css("border", border + "px solid red")
+          .css("margin-left", leftmargin);
+        border += 2;
+        leftmargin += 10;
+      });
+    });
+  </script>
+</head>
+
+<body>
+  <h1>Using jQuery Document Traversal Features</h1>
+  <div id="content">
+
+    <p>The DOM of a Web page is organized as a tree structure. The elements in the page have family-like names to refer to their positions relative to other elements.</p>
+    <p>For example, the HEAD and BODY tags are "children" of the HTML tag, and are "siblings" of each other. They have the HTML tag as their "parent". jQuery provides functions for navigating the document tree and processing sets of elements, such as:</p>
+    <ul id="list1">
+      <li><code>children()</code>: Retrieves all the child elements of the matched elements, except text nodes</li>
+      <li><code>prev(), next(), parent()</code>: used to traverse the family relationships of an element</li>
+      <li><code>find()</code>: search within a given element to find elements that match a selector expression</li>
+      <li><code>each()</code>: loops over a set of matched elements and calls a function for each one</li>
+    </ul>
+    <div id="example">
+      <p class="a">This is paragraph 1</p>
+      <p id="para1">This is paragraph 2</p>
+      <p class="b">This is paragraph 3</p>
+      <p id="para4" lang="en-us">This is paragraph 4</p>
+      <p id="para5" lang="en-gb">This is paragraph 5</p>
+    </div>
+  </div>
+</body>
+
+</html>
