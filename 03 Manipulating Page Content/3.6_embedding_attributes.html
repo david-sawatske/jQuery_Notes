@@ -1,0 +1,77 @@
+<!--
+These attributes provide a way to associate bits of data with elements on a web
+page. jQuery provides a way for working with these data attributes through a
+series of convenience helper functions
+  * for use where you want to associate data with an el on the page
+    - resturaunt menu page may have prices associated w- items on the page
+
+.data() method: used to store and retrieve data on an element via data attributes
+  * storing data
+    - .data(key, value) key = name of attr to hold data  value = data itself
+    - .data(jsObj) multiple key value pairs
+  * retrieving data
+    - .data(key)
+    - .data()    returns JS obj containing all of the data on the element
+
+this shows an alert that displays the data on the element
+  document.getElementById("show").addEventListener("click", function(evt) {
+    alert(JSON.stringify($("#example").data(), null, "  "));
+  });
+
+in the 'store' fn, assign 'key1' to 1234 and assign 'key1' to 'string'
+  document.getElementById("store").addEventListener("click", function(evt) {
+    $("#example").data("key1", 1234);
+    $("#example").data("key2", "string");
+  });
+
+remove the data from the 'example' div stored in 'key2'
+  $("#example").removeData("key2");
+
+remove all of the data from the 'example' div
+  $("#example").removeData();
+
+-->
+
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Using the Data Methods</title>
+  <link rel="stylesheet" href="../style.css" />
+  <script type="text/javascript" src="../jquery-3.0.0.js"></script>
+  <script>
+    $("document").ready(function() {
+      document.getElementById("show").addEventListener("click", function(evt) {
+        alert(JSON.stringify($("#example").data(), null, "  "));
+      });
+      document.getElementById("store").addEventListener("click", function(evt) {
+        $("#example").data("key1", 1234);
+        $("#example").data("key2", "Joe Marini");
+      });
+      document.getElementById("remove").addEventListener("click", function(evt) {
+        $("#example").removeData("key2");
+      });
+    });
+  </script>
+</head>
+
+<body>
+  <h1>Using the Data Methods</h1>
+  <div id="content">
+
+    <p>jQuery can associate arbitrary data with page elements. Use the controls below to exercise the data() and removeData() functions on the example DIV element</p>
+    <div id="example" data-key3="data attribute">
+      <p class="a">This is paragraph 1</p>
+      <p id="para1">This is paragraph 2</p>
+      <p class="b">This is paragraph 3</p>
+      <p id="para4" lang="en-us">This is paragraph 4</p>
+      <p id="para5" lang="en-gb">This is paragraph 5</p>
+    </div>
+    <p>
+      <button id="store">Store data</button>&nbsp;
+      <button id="remove">Remove data</button>&nbsp;
+      <button id="show">Show data</button></p>
+  </div>
+</body>
+
+</html>
