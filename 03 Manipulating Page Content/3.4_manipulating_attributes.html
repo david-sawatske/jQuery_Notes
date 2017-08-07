@@ -1,0 +1,100 @@
+<!--
+.attr() fn reads the attribute of an attribute
+  * 'undefined' is returned if attribute not present
+  * if called with an attribute name and a value, an attr of that value is set
+    on the element
+
+.removeAttr() removes named attribute from an element
+
+create new p and add the alt for each image to it
+get ref to 'example' div and use 'after' fn to create new p with id of 'alts'
+loop over each img el and get the alt attr value and insert it into created p
+  * select all images, call each fn which takes a callback
+  * within, get the alt attr for the image currently being looked at
+  * add to the creating p by wrapping each DOM el in jQ fn and call 'attr(fn)'
+    to read the alt value
+
+    $("#example").after("<p id='alts'>"); // creates new p w id alts
+
+    $("img").each(function() {                      // loop to get each alt and
+      $("#alts").append($(this).attr("alt") + " "); // insert into the new p
+    });
+
+
+add a title attr to all link tags around each image
+  * called with attr name and value as arguments
+  $("a").attr("title", "Photo by some photographer");
+
+make each image open in a new tab
+  $("a").attr("target", "_blank");
+
+take away the link behavior for the images
+  $("a").removeAttr("href");
+
+change all of the images to point to the same image and have the same title
+  * passing JS obj to attr() allows us to change more than one at a time
+
+  $("img").attr({
+    src: "images/Spring.jpg",
+    title: "Spring all the things!"
+  });
+
+-->
+
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Manipulating Element Attributes</title>
+  <link rel="stylesheet" href="../style.css" />
+  <script type="text/javascript" src="../jquery-3.0.0.js"></script>
+  <script type="text/javascript">
+    $("document").ready(function() {
+      $("#example").after("<p id='alts'>"); // creates new p w id alts
+
+      $("img").each(function() {                      // loop to get each alt and
+        $("#alts").append($(this).attr("alt") + " "); // insert into the new p
+      });
+
+      $("a").attr("title", "Photo by some photographer");
+
+      $("a").attr("target", "_blank");
+
+      $("a").removeAttr("href");
+
+      $("img").attr({
+        src: "images/Spring.jpg",
+        title: "Spring all the things!"
+      });
+    });
+  </script>
+  <style type="text/css">
+    img {
+      margin: 20px;
+      width: 200px;
+      height: 200px;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Manipulating Attributes</h1>
+  <div id="content">
+
+    <p>To read or change element attributes, use the <code>attr()</code> function. <code>removeAttr()</code> can be used to remove attributes</p>
+    <ul>
+      <li><code>attr()</code>: get the value of an attribute</li>
+      <li><code>attr(<i>name</i>, <i>val</i>)</code>: set the <i>name</i> attribute to <i>val</i></li>
+      <li><code>attr(<i>{ name: val ... }</i>)</code>: set multiple attributes in one call</li>
+      <li><code>removeAttr(<i>name</i>)</code>: remove the attribute from the element</li>
+    </ul>
+    <div id="example">
+      <a href="images/Grass.jpg"><img src="images/Grass.jpg" alt="Grass" /></a>
+      <a href="images/Leaf.jpg"><img src="images/Leaf.jpg" alt="Leaf" /></a>
+      <a href="images/Spring.jpg"><img src="images/Spring.jpg" alt="Spring" /></a>
+      <a href="images/Water.jpg"><img src="images/Water.jpg" alt="Water" /></a>
+    </div>
+  </div>
+</body>
+
+</html>

@@ -35,8 +35,10 @@ the return of that selector with the fn 'replacementFn'
 write the 'replacementFn' that is called on each el
 inside the fn the value of 'this' is set to be the current DOM el being operated on
 wrap 'this' inside the jQ fn to give jQ object
-if the  p has the content '1', change the '1' to 'uno'
+if the  p has the content '1', change the contents to "<p>This is paragraph uno</p>";
+  * .indexOf("1") returns a positive integer, if string is found
 if not, return the HTML content as it is
+
 
 ...
 <script type="text/javascript">
